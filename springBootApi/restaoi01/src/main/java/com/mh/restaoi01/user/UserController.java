@@ -48,12 +48,15 @@ public class UserController {
 //    삭제 = resign -> Y로 수정
     @PutMapping("/delete")
 //    public ResponseEntity<User> resignuser(@PathVariable("id") String id, @RequestParam("password") String password)
-    public ResponseEntity<User> resignuser(@RequestBody @Valid UserDto userDto)
+    public ResponseEntity<String> resignuser(@RequestBody @Valid UserDto userDto)
     {
         ModelMapper mapper = new ModelMapper();
         User user = mapper.map(userDto, User.class);
-        User resignuser = userService.resignuser(userDto.getId(), userDto.getPassword(), userDto);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(resignuser);
+//        User resignuser = userService.resignuser(userDto.getId(), userDto.getPassword());
+        String result = userService.resignuser(userDto.getId(), userDto.getPassword());
+//        String id = userDto.getId();
+//        String password = userDto.getPassword();
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(result);
     }
 
 

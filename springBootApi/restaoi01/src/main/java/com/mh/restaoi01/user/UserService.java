@@ -96,13 +96,14 @@ public class UserService {
     }
 
 
-    public User resignuser(String id, String password, UserDto userDto) {
+    public String resignuser(String id, String password) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("ʕ •ᴥ•ʔ ━☆ﾟ 유저가 없습니다. ʕ •ᴥ•ʔ ━☆ﾟ"));
         if (password.equals(user.getPassword())){
             user.setResign(resign.Y);
 
             userRepository.save(user);
-            throw new RuntimeException("탈퇴 완료되었습니다");
+            return "ʕ •ᴥ•ʔ ━☆ﾟ 탈퇴 완료되었습니다. ʕ •ᴥ•ʔ ━☆ﾟ";
+//            throw new RuntimeException("탈퇴 완료되었습니다");
         }
         else {
             throw new IllegalArgumentException("비밀번호가 맞지 않습니다");

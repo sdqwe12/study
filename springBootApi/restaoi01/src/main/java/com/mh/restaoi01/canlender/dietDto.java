@@ -1,4 +1,4 @@
-package com.mh.restaoi01.canlender;
-
-public class dietDto {
-}
+//package com.mh.restaoi01.canlender;
+//
+//public class dietDto {
+//}

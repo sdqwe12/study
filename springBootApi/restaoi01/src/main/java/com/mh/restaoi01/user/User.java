@@ -42,7 +42,6 @@ public class User {
     private resign resign;
 
 
-//    @CreatedDate
-//    private LocalDateTime writeDate;
+
 }
 

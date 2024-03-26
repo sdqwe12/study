@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 public class UserDto{
+
     @Column(name = "id", nullable = false, unique = true)
     private String id;
 
