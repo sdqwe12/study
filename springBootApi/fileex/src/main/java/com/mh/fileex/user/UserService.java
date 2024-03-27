@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 @Service
 //@RequiredArgsConstructor //이미지패스의 경로를 정확하게 넣기 위해서 이거 안쓰고 생성자 직접 써줌
@@ -56,5 +57,18 @@ public class UserService {
 
         //디스크에 파일 저장시 user 저장
         userRepository.save(user);
+    }
+
+    public String loginCheck(UserDto userDto) {
+
+        Optional<User> optionalUser = userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
+
+        if (optionalUser.isPresent()){
+            return "loginok";
+        }
+        else {
+            return "loginfail";
+        }
+
     }
 }

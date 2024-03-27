@@ -19,16 +19,13 @@ public class UserController {
 //    보안을 위해 포스트맵핑 리퀘스트바디를 사용해서 수정한 코드
     @PostMapping("/info")
     public ResponseEntity<User> Userinfo(@RequestBody UserDto userDto){
-        String id = userDto.getId();
-        User user = userService.userInfo(id);
+//        String id = userDto.getId(); 이렇게 쓸 필요가 없지
+//        User user = userService.userInfo(id); 유저디티오.겟아이디를 id에 담아서 매개변수로 보낸건데 그냥 바로 하면되지
+
+        User user = userService.userInfo(userDto.getId());
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
-//    처음에 겟맵핑 패스배리어블 사용한 방법
-//    @GetMapping("/{id}")
-//    public ResponseEntity<User> Userinfo(@PathVariable String id){
-//        User user = userService.userInfo(id);
-//        return ResponseEntity.status(HttpStatus.OK).body(user);
-//    }
+
 
 
 
@@ -61,25 +58,7 @@ public class UserController {
 
 
 
-//    @DeleteMapping("")
-//    public ResponseEntity<String> deleteUser(@RequestParam("id") String id, @RequestParam("password") String password)
-    //패스배리어블과 리퀘스트파람을 사용한 것 메인
-//    @DeleteMapping("deletepath/{id}")
-//    public ResponseEntity<String> deleteUser(@PathVariable("id") String id, @RequestParam("password") String password)
-//    {
-//        String result = userService.delete(id, password);
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(result);
-//    }
-//
-//    //리퀘스트바디를 사용한 것 서브임
-//    @DeleteMapping("delete")
-//    public ResponseEntity<String> deleteUser(@RequestBody UserDto userDto){
-//
-//
-////        userService.delete(userDto);
-//        System.out.println(userDto);
-//        return ResponseEntity.status(HttpStatus.ACCEPTED).body("삭제됨");
-//    }
+
 
 
 
