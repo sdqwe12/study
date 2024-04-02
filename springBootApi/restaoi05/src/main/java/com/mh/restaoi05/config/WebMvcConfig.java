@@ -1,5 +1,6 @@
-package com.mh.restaoi05.config;
+package com.mh.restapi05.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
@@ -14,32 +15,61 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class WebMvcConfig {
-
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    // 스프링 부트 3버전부터는 람다문법을 써야지만 에러가 안남 어쩔 수 없음
-    // jwt 토큰 인증 달겠다
+    // 스프링 부트 3 버전 람다문법을 써야지만 에러가 안납니다.
+    // jwt 토큰 인증을 달겠다.
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf().disable(); 이건 스프링 2버전용
-//        post방식 put방식 delt방식 사요알 때 csrf 토큰 사용하지 않겠다는 말임 밑에꺼가
-        http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable());
-//        http.csrf(qwe -> qwe.disable()); 이렇게 해도됨 변수명이라
-
+        // post 방식 put 방식 delete 방식을 사용할때 csrf 토큰을 사용하지 않겠다.
+        // 허용해주겠다..
+        http.csrf(httpSecurityCsrfConfigurer ->  httpSecurityCsrfConfigurer.disable() );
         http
                 .authorizeRequests(
-//                        req ->
-//                                req.requestMatchers("/member","test").permitAll().
-//                                        anyRequest().authenticated()
-                        req -> req.anyRequest().permitAll()
+//                       req ->
+//                            req.requestMatchers("/member","test").permitAll().
+//                            anyRequest().authenticated()
+                        req->
+                                req
+                                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+                                .anyRequest().permitAll()
 
                 );
-                //스프링시큐리티에 필터를 다는 방법
-//        http.addFilter(filter);
-        //인터셉터
+        // h2 console 사용하는 구문
+        http.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(
+                frameOptionsConfig -> frameOptionsConfig.sameOrigin()
+        ));
+
+        // Exceptionhandling ->
+        // 스프링시큐리티에서 필터를 다는 방법
+
+        // http.addFilter(filter);
+
+        // 인터셉터
+        // http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        // 유저 관리 하는 매니저 클래스
+//        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
+//
+//        // 로그인 할수 있는 유저 생성
+//        UserDetails userDetails = User.withUsername("user")
+//                .password(passwordEncoder().encode("1234"))
+//                .roles("USER")
+//                .build();
+//
+//        // 유저관리 하는 매니저 클래스에 유저 등록
+//        userDetailsManager.createUser(userDetails);
+//
+//        // 유저관리 하는 매니저 IOC 컨테이너에 등록 -> securityConfig에서 사용
+//        return userDetailsManager;
+//    }
+
 }

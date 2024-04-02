@@ -63,8 +63,7 @@ public class UserService {
 //        Optional<User> updateuser = userRepository.findById(user.getId());
 //        User updateuser = userRepository.findById(user.getId()).orElseThrow(
         User updateuser = userRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("ʕ •ᴥ•ʔ ━☆ﾟ 유저가 없습니다. ʕ •ᴥ•ʔ ━☆ﾟ")
-        );
+                () -> new RuntimeException("ʕ •ᴥ•ʔ ━☆ﾟ 유저가 없습니다. ʕ •ᴥ•ʔ ━☆ﾟ"));
 
 //        if( updateuser.isEmpty()){
 //            System.out.println("수정할수 있는 user 가 없습니다.");

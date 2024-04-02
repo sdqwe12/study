@@ -1,11 +1,10 @@
 package com.mh.restaoi01.canlender;
 
+import com.mh.restaoi01.user.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 @RestController
 @RequestMapping("/calender")
@@ -15,9 +14,17 @@ public class CalenderController {
     private final CalenderService calenderService;
 
     @PostMapping("")
-    public List<Double> findCaloriesPerMonth(@RequestBody String id) {
-        System.out.println("콘트롤러 id"+id);
-        return calenderService.findCalorieDifferencePerMonth(id);
+    public List<Double> findCaloriesPerMonth(@RequestBody UserDto userDto) {
+
+        return calenderService.findCalorieDifferencePerMonth(userDto.getId());
+    }
+
+
+
+    @PostMapping("/a/{id}")
+    public String a(@PathVariable String id){
+        System.out.println("컨트롤에서 받는 id ="+id);
+        return calenderService.abc(id);
     }
 
 //    @PostMapping("")

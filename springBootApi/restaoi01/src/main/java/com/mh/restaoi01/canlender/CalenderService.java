@@ -22,8 +22,17 @@ public class CalenderService {
             Double calorieDifference = (Double) result[0]; // Double 타입으로 캐스팅
             calorieDifferences.add(calorieDifference);
         }
-
         return calorieDifferences;
+    }
+
+
+
+    public String abc(String id) {
+
+        String result = calenderRepository.abc(id);
+        System.out.println("서비스에서 받는 id ="+id);
+        System.out.println("리포지토리에서 서비스로 반환된 결과값 " + result);
+        return result;
     }
 
 
