@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:text="${title}">Title</title>
@@ -21,7 +21,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/main/member">member</a>
-                </li>
+                </li>Fau
                 <li class="nav-item">
                     <a class="nav-link" href="/main/todo">todo</a>
                 </li>
@@ -39,9 +39,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/main/join">Join</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/main/signin">SignIn</a>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                    <a class="nav-link" href="/main/login">LogIn</a>
                 </li>
+                <li class="nav-item" sec:authentication="!isAuthenticated()" >
+                    <a class="nav-link" href="/main/logout">LogOut</a>
+                </li>
+
 
             </ul>
             <form class="d-flex" role="search">
