@@ -1,0 +1,23 @@
+FROM bellsoft/liberica-openjdk-alpine:17
+# or
+# FROM openjdk:8-jdk-alpine
+# FROM openjdk:11-jdk-alpine
+
+# CMD ["./gradlew", "clean", "build"]
+# or Maven 
+# CMD ["./mvnw", "clean", "package"]
+
+# VOLUME /tmp
+
+# ARG JAR_FILE=build/libs/*.jar
+# or Maven
+# ARG JAR_FILE_PATH=target/*.jar
+
+# 카피 자르 파일도 조금 수정해서 앱닷자르를 앱닷자르로 복사해라 그런말
+
+COPY app.jar app.jar
+
+# 8080 포트 열기 밑에 두개만 작동된다고 생각하면 됨
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","-Dspring.profiles.active=dev","/app.jar"]

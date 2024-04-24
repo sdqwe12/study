@@ -1,0 +1,11 @@
+insert into user (email,password,nickname,phone,birthdate,resign,loginstate,role) values ('a@naver.com','1234','닉네임','01011111111','000101','N','Y','USER');
+--INSERT into user (email,password) VALUES ('aaa@naver.com','1234');
+INSERT into product (p_category,p_name) VALUES ('beverage','아메리카노');
+INSERT into product (p_category,p_name) VALUES ('beverage','에스프레소');
+INSERT into product (p_category,p_name) VALUES ('beverage','디카페인 커피');
+INSERT into product (p_category,p_name) VALUES ('food','브레드');
+INSERT into product (p_category,p_name) VALUES ('food','케이크&미니디저트');
+INSERT into product (p_category,p_name) VALUES ('food','샌드위치&샐러드');
+insert into product (p_category,p_name) VALUES ('goods','머그/글라스');
+insert into product (p_category,p_name) VALUES ('goods','텀블러/보온병');
+insert into product (p_category,p_name) VALUES ('goods','원두');
